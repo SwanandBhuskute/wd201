@@ -56,7 +56,7 @@ lineDetail.question(`node index.js --port `, (name) => {
                     }
                 })
                 .listen(port, () => {
-                    console.log(`Server is running on port ${port}`);
+                    console.log(`node index.js --port ${port}`);
                 });
 });
 
