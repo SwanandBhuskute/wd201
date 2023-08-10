@@ -1,11 +1,7 @@
 const http = require("http");
 const fs = require("fs");
-const readline = require("readline")
-
-const lineDetail = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-});
+// const readline = require("readline");
+const argv = require("minimist")(process.argv.slice(2));
 
 let homeContent = "";
 let projectContent = "";
@@ -32,31 +28,36 @@ fs.readFile("registration.html", (err, registration) => {
   registrationContent = registration;
 });
 
+// const lineDetail = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
 
-lineDetail.question(`node index.js --port `, (name) => {
-    const port = parseInt(name);
-    
-    http
-    .createServer((request, response) => {
-        let url = request.url;
-        response.writeHeader(200, { "Content-Type": "text/html" });
-        switch (url) {
-            case "/project":
-                response.write(projectContent);
-                response.end();
-                break;
-            case "/registration":
-                response.write(registrationContent);
-                response.end();
-                break;
-            default:
-                response.write(homeContent);
-                response.end();
-                break;
-                    }
-                })
-                .listen(port, () => {
-                    console.log(`node index.js --port ${port}`);
-                });
-});
+const port = argv.port || 3000;
 
+http
+  .createServer((request, response) => {
+    let url = request.url;
+    response.writeHeader(200, { "Content-Type": "text/html" });
+    switch (url) {
+      case "/project":
+        response.write(projectContent);
+        response.end();
+        break;
+      case "/registration":
+        response.write(registrationContent);
+        response.end();
+        break;
+      default:
+        response.write(homeContent);
+        response.end();
+        break;
+    }
+  })
+  .listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+
+// lineDetail.question("Press Enter to close the server...", () => {
+//   lineDetail.close();
+// });
