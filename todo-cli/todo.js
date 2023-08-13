@@ -3,8 +3,6 @@ const todoList = () => {
   
     const add = (todoItem) => {
       all.push(todoItem);
-      // todoItem.completed = !todoItem.completed; // Set completed property to false
-      // all.push(todoItem);
     };
   
     const markAsComplete = (index) => {
