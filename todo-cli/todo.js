@@ -35,7 +35,7 @@ const todoList = () => {
           return `${checkbox} ${item.title}${formattedDate}`;
         })
         .join("\n");
-    };
+    };       
 
     return {
       all,
@@ -79,15 +79,15 @@ console.log("Overdue")
 var overdues = todos.overdue()
 var formattedOverdues = todos.toDisplayableList(overdues)
 console.log(formattedOverdues)
-console.log("\n")
+// console.log("\n")
 
-console.log("Due Today")
+console.log("\nDue Today")
 let itemsDueToday = todos.dueToday()
 let formattedItemsDueToday = todos.toDisplayableList(itemsDueToday)
 console.log(formattedItemsDueToday)
-console.log("\n")
+// console.log("\n")
 
-console.log("Due Later")
+console.log("\nDue Later")
 let itemsDueLater = todos.dueLater()
 let formattedItemsDueLater = todos.toDisplayableList(itemsDueLater)
 console.log(formattedItemsDueLater)
