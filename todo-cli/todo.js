@@ -46,8 +46,10 @@ const todoList = () => {
       dueLater,
       toDisplayableList,
     };
-  };
+};
   
+module.exports= todoList;
+
 // ####################################### #
 // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
 // ####################################### #
@@ -92,5 +94,3 @@ const todoList = () => {
 // let formattedItemsDueLater = todos.toDisplayableList(itemsDueLater)
 // console.log(formattedItemsDueLater)
 // console.log("\n\n")
-
-module.exports= todoList;
