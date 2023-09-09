@@ -19,7 +19,7 @@ app.get("/", async (request, response) => {
   }
 });
 
-app.get("/todos", async (request, response) => {
+app.get("/todos", async (_request, response) => {
   console.log("We have to fetch all the todos");
   try {
     const all_todos = await Todo.findAll();
@@ -30,7 +30,7 @@ app.get("/todos", async (request, response) => {
   }
 });
 
-app.get("/todos", async (request, response) => {
+app.get("/todos", async (_request, response) => {
   console.log("We have to fetch all the todos");
   try {
     const all_todos = await Todo.findAll();
@@ -47,7 +47,7 @@ app.post("/todos", async (request, response) => {
   try {
     const todo = await Todo.addTodo({
       title: request.body.title,
-      dueDate: request.body.dueDate,
+      duedate: request.body.duedate,
     });
     return response.json(todo);
   } catch (error) {
