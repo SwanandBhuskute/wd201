@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     static getTodos() {
-      return this.findAll();
+      return this.findAll({ order: [["id", "ASC"]] });
     }
     markAsCompleted() {
       return this.update({ completed: true });

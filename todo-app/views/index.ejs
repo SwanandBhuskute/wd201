@@ -9,15 +9,8 @@
 <body>
     <!-- Todo Home page -->
     <%- include ('header.ejs') %>
-
-    <table>
-        <% for( var i = 0; i < all_Todos.length; i++) {%>
-            <tr>
-                <td>
-                    <%= all_Todos[i].title %>
-                </td>
-            </tr>
-        <% } %>
-    </table>
+    
+    <%- include ('todos.ejs') %>
+    <%- include ('footer.ejs') %>
 </body>
 </html>
