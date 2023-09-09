@@ -49,60 +49,26 @@ describe("Todo test suite", () => {
   });
 
   test("Fetches all todos in the database using /todos endpoint", async () => {
-    try {
-      await agent.post("/todos").send({
-        title: "Buy xbox",
-        dueDate: new Date().toISOString(),
-        completed: false,
-      });
-      await agent.post("/todos").send({
-        title: "Buy ps3",
-        dueDate: new Date().toISOString(),
-        completed: false,
-      });
-      const response = await agent.get("/todos");
-      if (response.statusCode !== 200) {
-        throw new Error(
-          `Failed to fetch todos. Status code: ${response.statusCode}`,
-        );
-      }
-      const parsedResponse = JSON.parse(response.text);
-      expect(parsedResponse.length).toBe(4);
-      expect(parsedResponse[3]["title"]).toBe("Buy ps3");
-    } catch (error) {
-      // Handle the error, e.g., log it or fail the test
-      console.error(error);
-      // throw error; // This line will fail the test
+    await agent.post("/todos").send({
+      title: "Buy xbox",
+      dueDate: new Date().toISOString(),
+      completed: false,
+    });
+    await agent.post("/todos").send({
+      title: "Buy ps3",
+      dueDate: new Date().toISOString(),
+      completed: false,
+    });
+    const response = await agent.get("/todos");
+    if (response.statusCode !== 200) {
+      throw new Error(
+        `Failed to fetch todos. Status code: ${response.statusCode}`,
+      );
     }
+    const parsedResponse = JSON.parse(response.text);
+    expect(parsedResponse.length).toBe(4);
+    expect(parsedResponse[3]["title"]).toBe("Buy ps3");
   });
-
-  // test("Fetches all todos in the database using /todos endpoint", async () => {
-  //   // Check the content type of the response
-  //   await agent.post("/todos").send({
-  //     title: "Buy fruits",
-  //     dueDate: new Date().toISOString(),
-  //     completed: false,
-  //   });
-  //   await agent.post("/todos").send({
-  //     title: "Buy vegetables",
-  //     dueDate: new Date().toISOString(),
-  //     completed: false,
-  //   });
-  //   const response = await agent.get("/todos");
-
-  //   // Check the content type of the response
-  //   const contentType = response.header["content-type"];
-
-  //   if (contentType.includes("application/json")) {
-  //     // Parse JSON response if it's JSON
-  //     const parsedResponse = JSON.parse(response.text);
-  //     expect(parsedResponse.length).toBe(4);
-  //     expect(parsedResponse[3]["title"]).toBe("Buy ps3");
-  //   } else {
-  //     console.log("Received non-JSON response:", response.text);
-  //     expect(response.status).toBe(200);
-  //   }
-  // });
 
   test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
     // FILL IN YOUR CODE HERE
