@@ -3,12 +3,20 @@
 const express = require("express");
 const app = express();
 const { Todo } = require("./models");
+const path = require("path");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-app.get("/", (response) => {
-  response.send("hello world");
-  // console.log("Todo list")
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname + "/public")));
+
+app.get("/", async (request, response) => {
+  const all_Todos = await Todo.getTodos();
+  if (request.accepts("html")) {
+    response.render("index", { all_Todos });
+  } else {
+    response.json(all_Todos);
+  }
 });
 
 app.get("/todos", async (request, response) => {
