@@ -30,17 +30,6 @@ app.get("/todos", async (_request, response) => {
   }
 });
 
-app.get("/todos", async (_request, response) => {
-  console.log("We have to fetch all the todos");
-  try {
-    const all_todos = await Todo.findAll();
-    return response.send(all_todos);
-  } catch (error) {
-    console.log(error);
-    return response.status(422).json(error);
-  }
-});
-
 app.post("/todos", async (request, response) => {
   console.log("Creating a todo", request.body);
   //Todo
