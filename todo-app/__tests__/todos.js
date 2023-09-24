@@ -28,7 +28,7 @@ describe("Todo test suite", () => {
     const csrfToken = extractCsrfToken(res);
     const response = await agent.post("/todos").send({
       title: "Buy milk",
-      dueDate: new Date().toISOString(),
+      duedate: new Date().toISOString(),
       completed: false,
       _csrf: csrfToken,
     });
@@ -50,16 +50,15 @@ describe("Todo test suite", () => {
   //     completed: false,
   //     _csrf: csrfToken,
   //   });
-  //   const gropuedTodosResponse = await agent
+  //   const groupTodosResponse = await agent
   //     .get("/")
   //     .set("Accept", "application/json");
-  //   const parsedGroupedResponse = JSON.parse(gropuedTodosResponse.text);
-  //   const dueTodayCount = parsedGroupedResponse.dueToday.length;
-  //   const latestTodo = parsedGroupedResponse.dueToday[dueTodayCount - 1];
+  //   const parseGroupResponse = JSON.parse(groupTodosResponse.test);
+  //   const dueTodayCount = parseGroupResponse.dueToday.length;
+  //   const latestTodo = parseGroupResponse.dueToday[dueTodayCount - 1];
   //   const status = latestTodo.completed ? false : true;
   //   res = await agent.get("/");
-  //   csrfToken = extractCsrfToken(res.text);
-
+  //   csrfToken = extractCsrfToken(res);
   //   const response = await agent.put(`todos/${latestTodo.id}`).send({
   //     _csrf: csrfToken,
   //     completed: status,
@@ -91,15 +90,39 @@ describe("Todo test suite", () => {
   // });
 
   // test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
+  //   // let res = await agent.get("/");
+  //   // let csrfToken = extractCsrfToken(res);
+  //   // // FILL IN YOUR CODE HERE
+  //   // await agent.post("/todos").send({
+  //   //   title: "Go Goa",
+  //   //   duedate: new Date().toISOString(),
+  //   //   completed: false,
+  //   //   _csrf: csrfToken,
+  //   // });
+  //   // const gropuedTodosResponse = await agent
+  //   //   .get("/")
+  //   //   .set("Accept", "application/json");
+  //   // const parsedGroupedResponse = JSON.parse(gropuedTodosResponse.text);
+  //   // const dueTodayCount = parsedGroupedResponse.dueToday.length;
+  //   // const latestTodo = parsedGroupedResponse.dueToday[dueTodayCount - 1];
+
+  //   // res = await agent.get("/");
+  //   // csrfToken = extractCsrfToken(res.text);
+
+  //   // const response = await agent.put(`todos/${latestTodo.id}`).send({
+  //   //   _csrf: csrfToken,
+  //   // });
+  //   // const parsedUpdateResponse = JSON.parse(response.text);
+  //   // expect(parsedUpdateResponse.completed).toBe(true);
   //   let res = await agent.get("/");
   //   let csrfToken = extractCsrfToken(res);
-  //   // FILL IN YOUR CODE HERE
   //   await agent.post("/todos").send({
-  //     title: "Go Goa",
+  //     title: "Go Work!",
   //     dueDate: new Date().toISOString(),
   //     completed: false,
   //     _csrf: csrfToken,
   //   });
+
   //   const gropuedTodosResponse = await agent
   //     .get("/")
   //     .set("Accept", "application/json");
@@ -108,7 +131,7 @@ describe("Todo test suite", () => {
   //   const latestTodo = parsedGroupedResponse.dueToday[dueTodayCount - 1];
 
   //   res = await agent.get("/");
-  //   csrfToken = extractCsrfToken(res.text);
+  //   csrfToken = extractCsrfToken(res);
 
   //   const response = await agent.put(`todos/${latestTodo.id}`).send({
   //     _csrf: csrfToken,
