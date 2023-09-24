@@ -1,7 +1,5 @@
 {
   "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "csurf": "^1.11.0",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.1"
