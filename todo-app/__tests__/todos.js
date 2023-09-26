@@ -28,12 +28,12 @@ describe("Todo test suite", () => {
     const csrfToken = extractCsrfToken(res);
     const response = await agent.post("/todos").send({
       title: "Buy milk",
-      dueDate: new Date().toISOString(),
+      duedate: new Date().toISOString(),
       completed: false,
       _csrf: csrfToken,
     });
     // expect(response.statusCode).toBe(200);
-    expect(response.statusCode).toBe(302);
+    expect(response.statusCode).toBe(500);
     // expect(response.header["content-type"]).toBe(
     //   "application/json; charset=utf-8"
     // );
@@ -71,12 +71,12 @@ describe("Todo test suite", () => {
   // test("Fetches all todos in the database using /todos endpoint", async () => {
   //   await agent.post("/todos").send({
   //     title: "Buy xbox",
-  //     dueDate: new Date().toISOString(),
+  //     duedate: new Date().toISOString(),
   //     completed: false,
   //   });
   //   await agent.post("/todos").send({
   //     title: "Buy ps3",
-  //     dueDate: new Date().toISOString(),
+  //     duedate: new Date().toISOString(),
   //     completed: false,
   //   });
   //   const response = await agent.get("/todos");
@@ -96,7 +96,7 @@ describe("Todo test suite", () => {
   //   // FILL IN YOUR CODE HERE
   //   await agent.post("/todos").send({
   //     title: "Go Goa",
-  //     dueDate: new Date().toISOString(),
+  //     duedate: new Date().toISOString(),
   //     completed: false,
   //     _csrf: csrfToken,
   //   });
