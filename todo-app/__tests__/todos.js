@@ -24,19 +24,19 @@ describe("Todo test suite", () => {
     server.close();
   });
 
-  // test("Not creating  a todo item with empty title", async () => {
+  // test("Not creating a todo item with empty date", async () => {
   //   const res = await agent.post("/todos").send({
-  //     title: "",
-  //     duedate: new Date().toISOString(),
+  //     title: "Empty date todo",
+  //     dueDate: "",
   //     completed: false,
   //   });
-  //   expect(res.status).toBe(500);
+  //   expect(res.status).toBe(400);
   // });
 
   test("Create a sample due today item", async () => {
     const res = await agent.post("/todos").send({
       title: "Due-Today Todo",
-      duedate: new Date().toISOString().split("T")[0],
+      dueDate: new Date().toISOString().split("T")[0],
       completed: false,
     });
 
@@ -48,7 +48,7 @@ describe("Todo test suite", () => {
   //   tomorrow.setDate(tomorrow.getDate() + 1);
   //   const res = await agent.post("/todos").send({
   //     title: "Go Goa",
-  //     duedate: tomorrow.toISOString().split("T")[0],
+  //     dueDate: tomorrow.toISOString().split("T")[0],
   //     completed: false,
   //   });
   //   expect(res.status).toBe(302);
@@ -59,7 +59,7 @@ describe("Todo test suite", () => {
   //   yesterday.setDate(yesterday.getDate() - 1);
   //   const res = await agent.post("/todos").send({
   //     title: "Submit assignment",
-  //     duedate: yesterday.toISOString().split("T")[0],
+  //     dueDate: yesterday.toISOString().split("T")[0],
   //     completed: false,
   //   });
   //   expect(res.status).toBe(302);
@@ -69,7 +69,7 @@ describe("Todo test suite", () => {
   //   // Create an overdue todo
   //   const overdueRes = await agent.post("/todos").send({
   //     title: "Overdue Todo",
-  //     duedate: "2021-01-01",
+  //     dueDate: "2021-01-01",
   //     completed: false,
   //   });
 
@@ -88,7 +88,7 @@ describe("Todo test suite", () => {
   // test("Toggle a completed item to incomplete when clicked on it", async () => {
   //   const completedTodo = await agent.post("/todos").send({
   //     title: "This is completed Todo",
-  //     duedate: new Date().toISOString().split("T")[0],
+  //     dueDate: new Date().toISOString().split("T")[0],
   //     completed: true,
   //   });
 
@@ -106,7 +106,7 @@ describe("Todo test suite", () => {
   // test("Delete a todo item", async () => {
   //   const createTodo = await agent.post("/todos").send({
   //     title: "Todo to Delete",
-  //     duedate: new Date().toISOString().split("T")[0],
+  //     dueDate: new Date().toISOString().split("T")[0],
   //     completed: false,
   //   });
 
@@ -136,7 +136,7 @@ describe("Todo test suite", () => {
 //     const csrfToken = extractCsrfToken(res);
 //     const response = await agent.post("/todos").send({
 //       title: "Buy milk",
-//       duedate: new Date().toISOString(),
+//       dueDate: new Date().toISOString(),
 //       completed: false,
 //       _csrf: csrfToken,
 //     });
@@ -179,12 +179,12 @@ describe("Todo test suite", () => {
 //   // test("Fetches all todos in the database using /todos endpoint", async () => {
 //   //   await agent.post("/todos").send({
 //   //     title: "Buy xbox",
-//   //     duedate: new Date().toISOString(),
+//   //     dueDate: new Date().toISOString(),
 //   //     completed: false,
 //   //   });
 //   //   await agent.post("/todos").send({
 //   //     title: "Buy ps3",
-//   //     duedate: new Date().toISOString(),
+//   //     dueDate: new Date().toISOString(),
 //   //     completed: false,
 //   //   });
 //   //   const response = await agent.get("/todos");
@@ -204,7 +204,7 @@ describe("Todo test suite", () => {
 //   //   // FILL IN YOUR CODE HERE
 //   //   await agent.post("/todos").send({
 //   //     title: "Go Goa",
-//   //     duedate: new Date().toISOString(),
+//   //     dueDate: new Date().toISOString(),
 //   //     completed: false,
 //   //     _csrf: csrfToken,
 //   //   });

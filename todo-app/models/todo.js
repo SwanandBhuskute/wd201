@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     static addTodo({ title, dueDate }) {
-      return this.create({ title: title, duedate: dueDate, completed: false });
+      return this.create({ title: title, dueDate: dueDate, completed: false });
     }
 
     markAsCompleted() {
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     static overdue() {
       return this.findAll({
         where: {
-          duedate: {
+          dueDate: {
             [Op.lt]: new Date().toLocaleDateString("en-CA"),
           },
           completed: false,
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     static dueToday() {
       return this.findAll({
         where: {
-          duedate: {
+          dueDate: {
             [Op.eq]: new Date().toLocaleDateString("en-CA"),
           },
           completed: false,
@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     static dueLater() {
       return this.findAll({
         where: {
-          duedate: {
+          dueDate: {
             [Op.gt]: new Date().toLocaleDateString("en-CA"),
           },
           completed: false,
@@ -87,7 +87,7 @@ module.exports = (sequelize, DataTypes) => {
   Todo.init(
     {
       title: DataTypes.STRING,
-      duedate: DataTypes.DATEONLY,
+      dueDate: DataTypes.DATEONLY,
       completed: DataTypes.BOOLEAN,
     },
     {
