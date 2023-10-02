@@ -9,9 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Todo App</title>
     <script>
-        // var token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
         var token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-        // const token = document.getElementById("csrfToken").value;
         const updateTodo = (id) => {
             const bool = document.querySelector(`#checkbox-${id}`).checked; 
             console.log(bool);
@@ -21,7 +19,7 @@
                     "Content-Type": "application/json",
                 },
                 body : JSON.stringify({
-                    "x-csrf-token" : token,
+                    _csrf : token,
                     completed : bool
                 })
             })
@@ -39,7 +37,7 @@
                 method: "delete",
                 headers: { "Content-type": "application/json"},
                 body: JSON.stringify({
-                    "x-csrf-token":token
+                    "_csrf":token
                 })
             })
             .then((res) => {
@@ -51,7 +49,6 @@
     </script>
 </head>
 <body>
-    <!-- Todo Home page -->
     <div class="grid grid-cols-6">
         <div class="col-start-3 col-span-2">
             <%- include ('header.ejs') %>
@@ -62,7 +59,7 @@
                         <input type="text" name="title" placeholder="What's next?" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm" required/>
                     </div>
                     <div class="flex-auto">
-                        <input type="date" name="duedate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4" />
+                        <input type="date" name="dueDate" class="border border-gray-300 rounded text-gray-900 w-full p-2 text-sm leading-4" />
                     </div>
                     <div class="flex-none">
                         <button type="submit" class="bg-green-600 text-white px-5 py-1.5 rounded font-medium mr-2 mb-2" >Add</button>
