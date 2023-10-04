@@ -5,7 +5,7 @@ body {
   /* font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
   width: 100vw;
   height: 100vw;
-  background: linear-gradient(30deg, #e49c86, #e087a9, #91d6f1, #88eed6);
+  background: linear-gradient(30deg, #f09478, #e980a8, #b67890, #a15b76);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
   height: 100vh;
@@ -13,15 +13,15 @@ body {
 
 @keyframes gradient {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 
   50% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
 
   100% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
 
