@@ -9,9 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title> <%= title %></title>
 </head>
-<body>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
     <div class="grid grid-cols-6">
-        <div class="col-start-3 col-span-2">
+        <div class="col-start-3 col-span-2" style="background: rgb(255, 254, 252); box-shadow: 3px 3px 9px 1px black; padding: 20px; border-radius: 4px;">
             <%- include ('notifications.ejs') %>
             <%- include ('header.ejs') %>
             <p class="py-2 text-xl italic">A simple <span class="underline font-semibold">Todo manager</span> app for managing your tasks.</p>
