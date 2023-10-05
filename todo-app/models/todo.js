@@ -78,8 +78,8 @@ module.exports = (sequelize, DataTypes) => {
       return this.findAll({
         where: {
           completed: true,
+          userId: userId,
         },
-        userId: userId,
         order: [["id", "ASC"]],
       });
     }
