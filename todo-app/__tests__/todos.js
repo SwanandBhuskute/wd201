@@ -10,20 +10,39 @@ function extractCsrfToken(res) {
   const $ = cheerio.load(res.text);
   return $("[name=_csrf]").val();
 }
-async (agent, username, password) => {
-  let res = await agent.get("/login");
-  let csrfToken = extractCsrfToken(res);
-  res = await agent.post("session").send({
-    email: username,
-    password: password,
-    _csrf: csrfToken,
-  });
-};
+
+// const login = async (agent, username, password) => {
+//   let res = await agent.get("/login");
+//   let csrfToken = extractCsrfToken(res);
+//   res = await agent.post("session").send({
+//     email: username,
+//     password: password,
+//     _csrf: csrfToken,
+//   });
+// };
 
 describe("Todo test suite", () => {
   beforeAll(async () => {
     await db.sequelize.sync({ force: true });
-    server = app.listen(3000, () => {});
+
+    // Find an available port (e.g., between 3000 and 4000)
+    let port = 3000;
+    let maxAttempts = 10;
+    while (maxAttempts > 0) {
+      try {
+        server = app.listen(port, () => {});
+        break; // Successfully started server on the port
+      } catch (error) {
+        // Port is in use, try the next one
+        port++;
+        maxAttempts--;
+      }
+    }
+
+    if (maxAttempts === 0) {
+      throw new Error("Failed to find an available port.");
+    }
+
     agent = request.agent(server);
   });
 
@@ -43,17 +62,6 @@ describe("Todo test suite", () => {
       password: "12345678",
       _csrf: csrfToken,
     });
-    expect(res.statusCode).toBe(302);
-  });
-
-  test("Sign out", async () => {
-    let res = await agent.get("/todos");
-    expect(res.statusCode).toBe(200);
-
-    res = await agent.get("/signout");
-    expect(res.statusCode).toBe(302);
-
-    res = await agent.get("/todos");
     expect(res.statusCode).toBe(302);
   });
 
@@ -156,4 +164,15 @@ describe("Todo test suite", () => {
   //   const parsedUpdateResponse = JSON.parse(response.text);
   //   expect(parsedUpdateResponse.completed).toBe(true);
   // });
+
+  test("Sign out", async () => {
+    let res = await agent.get("/todos");
+    expect(res.statusCode).toBe(200);
+
+    res = await agent.get("/signout");
+    expect(res.statusCode).toBe(302);
+
+    res = await agent.get("/todos");
+    expect(res.statusCode).toBe(302);
+  });
 });
