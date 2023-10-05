@@ -282,8 +282,8 @@ app.delete(
     const loggedInUser = request.user.id;
     console.log("We have to delete a todo with ID: ", request.params.id);
     try {
-      await Todo.remove(request.params.id, loggedInUser);
-      return response.json({ success: true });
+      const status = await Todo.remove(request.params.id, loggedInUser);
+      return response.json(status ? true : false);
     } catch (err) {
       return response.status(422).json(err);
     }
