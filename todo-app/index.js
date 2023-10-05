@@ -1,4 +1,4 @@
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001; //just to make sure app opens fast
 
 const app = require("./app");
 
