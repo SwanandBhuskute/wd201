@@ -194,18 +194,39 @@ app.get("/signout", (request, response, next) => {
   });
 });
 
+app.get("/todos", async (_request, response) => {
+  console.log("We have to fetch all the todos");
+  try {
+    const all_todos = await Todo.findAll();
+    return response.send(all_todos);
+  } catch (error) {
+    console.log(error);
+    return response.status(422).json(error);
+  }
+});
+
+app.get("/todos/:id", async function (request, response) {
+  try {
+    const todo = await Todo.findByPk(request.params.id);
+    return response.json(todo);
+  } catch (error) {
+    console.log(error);
+    return response.status(422).json(error);
+  }
+});
+
 app.post(
   "/todos",
   connnectEnsureLogin.ensureLoggedIn(),
   async (request, response) => {
     if (request.body.title.length == 0) {
       request.flash("error", "Title cannot be empty!");
-      return response.redirect("/todo");
+      return response.redirect("/todos");
     }
 
     if (request.body.dueDate.length == 0) {
       request.flash("error", "Due date cannot be empty!");
-      return response.redirect("/todo");
+      return response.redirect("/todos");
     }
 
     console.log("Creating new todo:", request.body);
@@ -216,31 +237,6 @@ app.post(
         userId: request.user.id,
       });
       return response.redirect("/todos");
-    } catch (error) {
-      console.log(error);
-      return response.status(422).json(error);
-    }
-  },
-);
-
-// app.get("/todos", async (_request, response) => {
-//   console.log("We have to fetch all the todos");
-//   try {
-//     const all_todos = await Todo.findAll();
-//     return response.send(all_todos);
-//   } catch (error) {
-//     console.log(error);
-//     return response.status(422).json(error);
-//   }
-// });
-
-app.get(
-  "/todos/:id",
-  connnectEnsureLogin.ensureLoggedIn(),
-  async function (request, response) {
-    try {
-      const todo = await Todo.findByPk(request.params.id);
-      return response.json(todo);
     } catch (error) {
       console.log(error);
       return response.status(422).json(error);
@@ -265,6 +261,18 @@ app.put(
     }
   },
 );
+
+app.put("/todos/:id/markAsCompleted", async (request, response) => {
+  console.log("We have to update a todo with ID:", request.params.id);
+  const todo = await Todo.findByPk(request.params.id);
+  try {
+    const updatedtodo = await todo.setCompletionStatus(request.body.completed);
+    return response.json(updatedtodo);
+  } catch (error) {
+    console.log(error);
+    return response.status(422).json(error);
+  }
+});
 
 app.delete(
   "/todos/:id",
