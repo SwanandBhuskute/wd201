@@ -83,6 +83,12 @@ passport.deserializeUser((id, done) => {
 app.set("view engine", "ejs");
 
 app.get("/", async (request, response) => {
+  // Check if the user is logged in
+  if (request.isAuthenticated()) {
+    // Redirect to "/todos" if the user is logged in
+    return response.redirect("/todos");
+  }
+  // for non-logged-in users
   response.render("index", {
     title: "Todo Application",
     csrfToken: request.csrfToken(),
