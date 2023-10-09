@@ -100,6 +100,8 @@ app.get(
   connnectEnsureLogin.ensureLoggedIn(),
   async (request, response) => {
     const loggedInUser = request.user.id;
+    const loggedInUserfName = request.user.firstName;
+    const loggedInUserlName = request.user.lastName;
 
     const allTodos = await Todo.getTodos(loggedInUser);
     const overdue = await Todo.overdue(loggedInUser);
@@ -116,6 +118,8 @@ app.get(
         dueToday,
         completedItems,
         csrfToken: request.csrfToken(),
+        userfName: loggedInUserfName,
+        userlName: loggedInUserlName,
       });
     } else {
       response.json({ overdue, dueLater, dueToday, completedItems });
