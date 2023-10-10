@@ -181,6 +181,42 @@ app.get("/login", (request, reponse) => {
   reponse.render("login", { title: "Login", csrfToken: request.csrfToken() });
 });
 
+app.get("/resetpassword", (request, reponse) => {
+  reponse.render("resetpassword", {
+    title: "Reset Password",
+    csrfToken: request.csrfToken(),
+  });
+});
+
+// Route for updating the password
+app.post("/setpassword", async (request, response) => {
+  const userEmail = request.body.email;
+  const newPassword = request.body.password;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ where: { email: userEmail } });
+
+    if (!user) {
+      request.flash("error", "User with that email does not exist.");
+      return response.redirect("/resetpassword");
+    }
+
+    // Hash the new password
+    const hashedPwd = await bcrypt.hash(newPassword, saltRounds);
+
+    // Update the user's password in the database
+    await user.update({ password: hashedPwd });
+
+    // Redirect to a success page or login page
+    return response.redirect("/login");
+  } catch (error) {
+    console.log(error);
+    request.flash("error", "Error updating the password.");
+    return response.redirect("/resetpassword");
+  }
+});
+
 app.post(
   "/session",
   passport.authenticate("local", {
